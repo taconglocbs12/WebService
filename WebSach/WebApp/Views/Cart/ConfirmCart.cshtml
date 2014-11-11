@@ -1,0 +1,103 @@
+﻿@model WebApp.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "Xác nhận & Thanh toán";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+
+<div class="columcenter">
+    <div class="header-column">THANH TOÁN TIỀN</div>  
+ 
+ <p>&nbsp;</p>
+	
+    <table align="center" @*bgcolor="#FFFFFF" bordercolor="#000000"*@ border="1" cellspacing="2" cellpadding="4">
+            <tr>
+                    <td align="center" width="45"><span style="color: #0000FF"><b>Mã SP</b></span></td>
+                    <td align="center" width="135"><span style="color: #0000FF"><b>Tên Sản phẩm</b></span></td>
+                    <td align="center" width="110"><span style="color: #0000FF"><b>Số lượng</b></span></td>
+                    <td align="center" width="90"><span style="color: #0000FF"><b>Đơn giá</b></span></td>
+                    <td align="center" width="110"><span style="color: #0000FF"><b>Thành tiền</b></span></td> 
+            </tr>
+           @foreach (var p in Model.Cart.Lines)
+           {
+            <tr>
+            
+                    <td align="center" width="45">@p.masp</td>
+                    <td align="center" width="135"><b>@p.tensp</b></td>
+                    <td align="center" width="110">@p.Quantity</td>
+                    <td align="center" width="90">@p.giasanpham VNĐ</td>
+                    <td align="center" width="110">@(p.Quantity*p.giasanpham) VNĐ</td>
+            </tr>
+           }               
+            <tr>
+                	<td colspan="4" align="center"><b style="color:#FF0000">TỔNG TIỀN </b></td>
+                    <td align="center" width="110"><b style="color:#FF0000">@Model.Cart.tongtien().ToString("") VNĐ</b></td> 
+            </tr>
+    </table>
+<p>&nbsp;</p>
+        @using (Html.BeginForm("Payment", "Cart", new {tongtien=@Model.Cart.tongtien() }))
+        {
+        <div class="noidunggiua">
+            <label for="hinhthucthanhtoan">Bạn hãy chọn hình thức thanh toán:</label>
+            <div align="left">
+                <input id="hinhthucthanhtoan" type="radio" value="Thanh toán sau khi nhận hàng tại nhà" name="hinhthucthanhtoan" checked="checked"/>
+                <label for="hinhthucthanhtoan"><b>Thanh toán sau khi nhận hàng tại nhà</b></label>
+                <br />
+                <input id="hinhthucthanhtoan"  type="radio" value="Chuyển khoản ATM" name="hinhthucthanhtoan"/>
+                <label for="hinhthucthanhtoan"><b>Chuyển khoản ATM</b></label>
+            </div>
+        </div>
+        <div class="noidunggiua">
+        	Địa chỉ giao hàng:
+            <br>
+            <div align="center">
+            <textarea name="diadiem" rows="1" cols="40" title="Địa chỉ giao hàng"></textarea>
+            </div>
+            <br>
+        </div>
+        <div class="noidunggiua">
+        	Bạn có thể để lại lời nhắn cho chúng tôi:
+            <br>
+            <div align="center">
+            <textarea name="customer_note" rows="5" cols="40" title="Bạn có thể để lại lời nhắn cho chúng tôi"></textarea>
+            </div>
+            <br>
+        </div>
+        
+        
+        <div align="center"><input type="submit" name="xacnhan" value="XÁC NHẬN MUA HÀNG" tabindex="2" onclick="alert('Đơn đặt hàng của bạn đã được gửi đi. Xin cảm ơn! Hệ thống chuyển đến trang chủ sau vài giây.');"/></div>
+        }
+        
+        <div class="noidunggiua">
+        	
+                Mời quý khách chuyển tiền vào tài khoản sau:
+                <br/>
+                <br/>
+                
+                <ul>
+                    <li>
+                        Chủ tài khoản:
+                        <b>Nguyễn Hoàng Nam</b>
+                    </li>
+                    <li>
+                        Số tài khoản:
+                        <b>711A24969466</b>
+                    </li>
+                    <li>
+                        Ngân hàng:
+                        <b>VietinBank - Ngân hàng công thương Bến Tre</b>
+                    </li>
+                    <br/>
+                    
+                </ul>
+        	
+        </div> 
+    	@*<?php
+	}
+	else
+	{
+		echo '<p>Giỏ hàng rỗng. Không thể tiến hành thanh toán. Nhấp <a href="index.php">đây</a> để quay về trang chủ.</p>';
+	}
+	?>*@
+    </div>
+@RenderPage("~/Views/Default/Footer.cshtml")
+

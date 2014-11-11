@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebApp.ServiceReference1.Sach>
+<div class="columcenter">
+    <div class="header-center">SÁCH CÙNG LOẠI</div>
+    <div style="width:580px">
+        @foreach (var p in Model)
+        {
+            <div class="sanpham">
+                <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(item => p.SachID).ToString().Trim()"><div><img src="../../Content/image/books/@Html.DisplayFor(item => p.HinhBia)" /></div></a>
+                <div class="tensanpham"><table align="center"><tr height="40px" valign="middle"><td><b>@Html.DisplayFor(item => p.TenSach)</b></td></tr></table></div>
+                <div style="color:#FF0000">Giá: @Html.DisplayFor(item => p.GiaBan) VNĐ</div>
+                @if (p.HetHang == false)
+                {
+                    if (Session["Account"]!=null)
+                    {
+
+                        <a href="../Cart/giohangthem?masanpham=@Html.DisplayFor(item => p.SachID).ToString()"><div class="muahang"></div></a>
+
+                    }
+                    else
+                    {
+                        <a href="" onclick="alert('Bạn phải đăng nhập để mua hàng!');"><div class="muahang"></div></a>
+                    }
+                }
+                else
+                {
+                    <a href="#"><div class="hethang"></div></a>
+                }
+                <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(item => p.SachID).ToString().Trim()"><div class="chitiet"></div></a>
+            </div>
+        }
+        <div class="clear"></div>
+        <div>@{Html.RenderAction("PhanTrang", "PageList", new { currentpage = "Default/chitietsanpham?masp=" + @ViewBag.masp, totalpages = ViewBag.TotalPages });}</div>
+        <div style="text-align:right; padding:6px; color:#FF3333; font-size:14px; height:22px"><a href="#top">>>Về đầu trang</a></div>
+    </div>
+</div>

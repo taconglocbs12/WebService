@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApp.ServiceReference1.Sach>
+@{
+    ViewBag.Title = "Danh mục Sách";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+
+<div class="columcenter">
+    @{Html.RenderPartial("~/Views/Default/Box-Timkiem.cshtml");}
+</div>
+
+<div class="columcenter">
+    <div class=" header-center">DANH MỤC SÁCH</div>
+    <!-- san pham -->
+    <div style="width:580px">
+        @foreach (var p in Model)
+        {
+            <div class="sanpham">
+                <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(item => p.SachID).ToString().Trim()"><div><img src="../../Content/image/books/@Html.DisplayFor(item => p.HinhBia)" /></div></a>
+                <div class="tensanpham"><table align="center"><tr height="40px" valign="middle"><td><b>@Html.DisplayFor(item => p.TenSach)</b></td></tr></table></div>
+                <div style="color:#FF0000">Giá: @Html.DisplayFor(item => p.GiaBan) VNĐ</div>
+                @if (p.HetHang == false)
+                {
+                    if (Request.IsAuthenticated)
+                    {
+
+                        <a href="../Cart/giohangthem?masanpham=@Html.DisplayFor(item => p.SachID).ToString()"><div class="muahang"></div></a>
+
+                    }
+                    else
+                    {
+                        <a href="" onclick="alert('Bạn phải đăng nhập để mua hàng!');"><div class="muahang"></div></a>
+                    }
+                }
+                else
+                {
+                    <a href="#"><div class="hethang"></div></a>
+                }
+                <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(item => p.SachID).ToString().Trim()"><div class="chitiet"></div></a>
+            </div>
+        }
+    </div>
+    <div class="clear"></div>
+    <div>@{Html.RenderAction("PhanTrang", "PageList", new { currentpage = "Default/Danhmuc?chude=" + @ViewBag.ChuDeID, totalpages = ViewBag.TotalPages });}</div>
+    <div style="text-align:right; padding:6px; color:#FF3333; font-size:14px; height:22px"><a href="#top">>>Về đầu trang</a></div>
+
+    <!--ket thuc cot giua-->
+</div>
+@RenderPage("Footer.cshtml")
+

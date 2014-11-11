@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Đăng kí thành viên";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+<div class="columcenter">
+    <div class="header-center">ĐĂNG KÍ THÀNH VIÊN</div>
+    <div style="width:580px">
+
+        <div class="noidunggiua">
+            @using (Html.BeginForm("FormRegister", "User", FormMethod.Post, new { id = "mainForm", name = "mainForm", onSubmit = "return Check();" }))
+            {
+                <div class="noidunggiua">
+                    <label for="name"><span class=" form_label">Tên truy nhập</span></label>
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        <input id="name" name="name" size="35" value="@ViewBag.ThongTinUsr.hoten" onchange="Checkname();" />
+                    }
+                    else
+                    {
+                        <input id="name" name="name" size="35" onchange="Checkname();" />
+                    }
+
+                    @Html.Raw(ViewBag.Mess)
+                    <span id="sao" style="color:#FF0000">@Html.Raw(ViewBag.Mess)</span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="pass"><span class=" form_label">Mật khẩu</span></label>
+
+                    <input type="password" id="pass" name="pass" size="35" maxlength="30" onchange="pass6kitu();" />
+
+                    <span id="mk" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="pass2"><span class=" form_label">Xác nhận lại mật khẩu</span></label>
+
+
+                    <input type="password" id="pass2" name="pass2" size="35" maxlength="30" onchange="checkpass();" />
+
+                    <span id="mk2" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="name2"><span class="form_label">Họ và tên</span></label>
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+
+                        <input id="name2" name="name2" value="@ViewBag.ThongTinUsr.hoten" size="35" onchange="Checkhoten();" />
+                    }
+                    else
+                    {
+                        <input value="" id="name2" name="name2" size="35" onchange="Checkhoten();" />
+                    }
+                    <span id="sao2" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="ngay"><span class="form_label">Ngày sinh</span></label>
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        <select name="ngay" id="ngay" onchange="check_date_month()">
+                            <option selected="selected" value="@ViewBag.ThongTinUsr.ngaysinh.Day">@ViewBag.ThongTinUsr.ngaysinh.Day</option>
+                            <script>
+				                for (i = 1; i <= 31; ++i)
+				                    document.write('<option value="' + i + '">' + i + '</option>');
+                            </script>
+                        </select>
+                    }
+                    else
+                    {
+                        <select name="ngay" id="ngay" onchange="check_date_month()">
+                            <option selected="selected" value="-1">[Ngày]</option>
+                            <script>
+				        for (i = 1; i <= 31; ++i)
+				            document.write('<option value="' + i + '">' + i + '</option>');
+                            </script>
+                        </select>
+                    }
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+
+                        <select name="thang" id="thang" onchange="check_date_month()">
+                            <option selected="selected" value="@ViewBag.ThongTinUsr.ngaysinh.Month">@ViewBag.ThongTinUsr.ngaysinh.Month</option>
+                            <script>
+            	                for (i = 1; i <= 12; ++i)
+            	                    document.write('<option value="' + i + '">' + i + '</option>');
+                            </script>
+                        </select>
+                    }
+                    else
+                    {
+                        <select name="thang" id="thang" onchange="check_date_month()">
+                            <option selected="selected" value="-1">[Tháng]</option>
+                            <script>
+            	                for (i = 1; i <= 12; ++i)
+            	                    document.write('<option value="' + i + '">' + i + '</option>');
+                            </script>
+                        </select>
+                    }
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        <select name="nam" id="nam" onchange="check_date_month()">
+                            <option style="width:49px;" selected="selected" value="@ViewBag.ThongTinUsr.ngaysinh.Year">@ViewBag.ThongTinUsr.ngaysinh.Year</option>
+                            <script>
+                                for (var i = 1913; i <= 2010; i++) {
+                                    var s = "<option value='" + i + "'>" + i + "</option>";
+                                    document.write(s);
+                                }
+                            </script>
+                        </select>
+
+                    }
+                    else
+                    {
+                        <select name="nam" id="nam" onchange="check_date_month()">
+                            <option style="width:49px;" selected="selected" value="-1">[Năm]</option>
+                            <script>
+                                for (var i = 1900; i <= 2010; i++) {
+                                    var s = "<option value='" + i + "'>" + i + "</option>";
+                                    document.write(s);
+                                }
+                            </script>
+                        </select>
+                    }
+                    <span id="ngaysinh" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="sex"><span class=" form_label">Giới tính</span></label>
+
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        int s = ViewBag.ThongTinUsr.gioitinh;
+                        if (s == 1)
+                        {
+                            <input id="sex" type="radio" value="1" name="sex" checked="checked" />
+                            <label for="sex">Nam</label>
+                            <input id="sex" type="radio" value="2" name="sex" />
+                            <label for="sex">Nữ</label>
+                        }
+                        else
+                        {
+                            <input id="sex" type="radio" value="1" name="sex" />
+                            <label for="sex">Nam</label>
+                            <input id="sex" type="radio" value="2" name="sex" checked="checked" />
+                            <label for="sex">Nữ</label>
+                        }
+                    }
+                    else
+                    {
+                        <input id="sex" type="radio" value="1" name="sex" checked="checked" />
+                        <label for="sex">Nam</label>
+                        <input id="sex" type="radio" value="2" name="sex" />
+                        <label for="sex">Nữ</label>
+                    }
+                    <span id="gt" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="email"><span class="form_label">Email</span></label>
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        <input value="@ViewBag.ThongTinUsr.email" id="email" name="email" size="35" onchange="checkEmail();" />
+                    }
+                    else
+                    {
+                        <input value="" id="email" name="email" size="35" onchange="checkEmail();" />
+                    }
+                    <span id="thu" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="phone"><span class="form_label">Điện thoại</span></label>
+                    @if (ViewBag.ThongTinUsr != null)
+                    {
+                        <input id="phone" name="phone" value="@ViewBag.ThongTinUsr.sdt" size="35" onchange="Checkdt();" />
+
+                    }
+                    else
+                    {
+                        <input value="" id="phone" name="phone" size="35" onchange="Checkdt();" />
+
+                    }
+                    <span id="dt" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <label for="tp"><span class="form_label">Tỉnh/ Thành phố</span></label>
+
+                    <select style="width:235px;" name="city" onchange="Checktp();">
+                        <option value="0">--- Chọn ---</option>
+                        <option value="TP. HCM">TP. HCM</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="An Giang">An Giang</option>
+                        <option value="Bạc Liêu">Bạc Liêu</option>
+                        <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                        <option value="Bắc Kạn">Bắc Kạn</option>
+                        <option value="Bắc Giang">Bắc Giang</option>
+                        <option value="Bắc Ninh">Bắc Ninh</option>
+                        <option value="Bến Tre">Bến Tre</option>
+                        <option value="Bình Dương">Bình Dương</option>
+                        <option value="Bình Định">Bình Định</option>
+                        <option value="Bình Phước">Bình Phước</option>
+                        <option value="Bình Thuận">Bình Thuận</option>
+                        <option value="Cà Mau">Cà Mau</option>
+                        <option value="Cao Bằng">Cao Bằng</option>
+                        <option value="Cần Thơ">Cần Thơ</option>
+                        <option value="Đà Nẵng">Đà Nẵng</option>
+                        <option value="Đắc Lắc">Đắc Lắc</option>
+                        <option value="Đắc Nông">Đắc Nông</option>
+                        <option value="Điện Biên">Điện Biên</option>
+                        <option value="Đồng Nai">Đồng Nai</option>
+                        <option value="Đồng Tháp">Đồng Tháp</option>
+                        <option value="Gia Lai">Gia Lai</option>
+                        <option value="Hà Giang">Hà Giang</option>
+                        <option value="Hà Nam">Hà Nam</option>
+                        <option value="Hà Tĩnh">Hà Tĩnh</option>
+                        <option value="Hải Dương">Hải Dương</option>
+                        <option value="Hải Phòng">Hải Phòng</option>
+                        <option value="Hậu Giang">Hậu Giang</option>
+                        <option value="Hòa Bình">Hòa Bình</option>
+                        <option value="Hưng Yên">Hưng Yên</option>
+                        <option value="Khánh Hòa">Khánh Hòa</option>
+                        <option value="Kiên Giang">Kiên Giang</option>
+                        <option value="Kon Tum">Kon Tum</option>
+                        <option value="Lai Châu">Lai Châu</option>
+                        <option value="Lạng Sơn">Lạng Sơn</option>
+                        <option value="Lào Cai">Lào Cai</option>
+                        <option value="Lâm Đồng">Lâm Đồng</option>
+                        <option value="Long An">Long An</option>
+                        <option value="Nam Định">Nam Định</option>
+                        <option value="Nghệ An">Nghệ An</option>
+                        <option value="Ninh Bình">Ninh Bình</option>
+                        <option value="Ninh Thuận">Ninh Thuận</option>
+                        <option value="Phú Thọ">Phú Thọ</option>
+                        <option value="Phú Yên">Phú Yên</option>
+                        <option value="Quảng Bình">Quảng Bình</option>
+                        <option value="Quảng Nam">Quảng Nam</option>
+                        <option value="Quảng Ngãi">Quảng Ngãi</option>
+                        <option value="Quảng Ninh">Quảng Ninh</option>
+                        <option value="Quảng Trị">Quảng Trị</option>
+                        <option value="Sóc Trăng">Sóc Trăng</option>
+                        <option value="Sơn La">Sơn La</option>
+                        <option value="Tây Ninh">Tây Ninh</option>
+                        <option value="Thái Bình">Thái Bình</option>
+                        <option value="Thái Nguyên">Thái Nguyên</option>
+                        <option value="Thanh Hóa">Thanh Hóa</option>
+                        <option value="Tiền Giang">Tiền Giang</option>
+                        <option value="Trà Vinh">Trà Vinh</option>
+                        <option value="Tuyên Quang">Tuyên Quang</option>
+                        <option value="Vĩnh Long">Vĩnh Long</option>
+                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                        <option value="Yên Bái">Yên Bái</option>
+                    </select>
+
+                    <span id="tp" style="color:#FF0000"></span>
+                </div>
+                <div class="noidunggiua">
+                    <textarea id="comments" rows="8" cols="64">
+                        ĐIỀU KHOẢN SỬ DỤNG WEBSITE
+
+
+                        Trách nhiệm của người sử dụng:
+
+                        -  Chịu trách nhiệm về những thông tin cá nhân cung cấp cho trang web khi bạn đăng ký sử dụng dịch vụ.
+                        -  Chịu trách nhiệm bảo vệ mật khẩu truy cập, và trách nhiệm của việc đăng nhập bằng mật khẩu của bạn, do hoặc không do bạn trực tiếp đăng nhập.
+                        -  Không được gây trở ngại, hạn chế cho việc sử dụng Dịch vụ của người dùng khác.
+                    </textarea>
+
+                </div>
+                <div class="noidunggiua" style="color:#000066">
+                    <input type="checkbox" id="agree" name="agree" onclick="checkagree(this);" /> Tôi đã đọc, hiểu, chấp nhận và tuân thủ những điều khoản này!
+                    <br /><span id="dongy" style="color:#FF0000"></span>
+                    <br />
+                </div>
+                <div class="noidunggiua">
+                    <label for=""><span class="form_label">&nbsp;</span></label>
+
+                    <input type="submit" name="dangky" value="Đăng ký" />
+                    <input type="reset" name="clear" value="Xóa trắng" />
+                </div>
+            }
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+@*@Html.Raw(ViewBag.Error)*@
+@{Html.RenderPartial("~/Views/Default/Footer.cshtml");}

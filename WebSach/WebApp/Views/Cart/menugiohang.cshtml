@@ -1,0 +1,15 @@
+﻿@model WebApp.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "menugiohang";
+}
+
+<div class="header-column">MUA HÀNG TRỰC TUYẾN</div>
+<div class="noidungcanhtrai">
+    <p><a href="#"><img width="15" height="8" src="../../Content/Image/icon.png">Hướng dẫn mua hàng</a></p>
+    <p><a href="/cart/Index"><img src="../../Content/image/giohang.png" align="middle" /></a></p>
+    <div style="text-align:center">Tổng sản phẩm : @Model.Cart.tongsanpham().ToString() </div>
+    <div style="text-align:center">Tổng số tiền : @Model.Cart.tongtien().ToString() VNĐ</div>
+</div>
+
+
+            

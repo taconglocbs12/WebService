@@ -1,0 +1,60 @@
+﻿@model WebApp.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+<div class="columcenter">
+    <div class="header-column">GIỎ HÀNG</div>   
+    @*  @Html.Raw("<font color='red'>Bạn chỉ được phép nhập tối đa 3 đơn vị hàng</font>")  *@ 
+    <!--<div class="noidunggiua"><hr color="336699" size="2" /></div>-->
+    <p>&nbsp;</p>
+    <table align="center" bgcolor:"#FFFFFF"  style=" border-color:yellow" border="1" cellspacing="2" cellpadding="4">
+                <tr>
+                      <td align="center" width="45"><span style="color: #0000FF"><b>Mã SP</b></span></td>
+                      <td align="center" width="95"><span style="color: #0000FF"><b>Tên SP</b></span></td>
+                      <td align="center" width="150"><span style="color: #0000FF"><b>Số lượng/ Cập nhật/ Xoá</b></span></td>
+                      <td align="center" width="90"><span style="color: #0000FF"><b>Đơn giá</b></span></td>
+                      <td align="center" width="110"><span style="color: #0000FF"><b>Thành tiền</b></span></td> 
+                </tr>
+                @foreach (var line in Model.Cart.Lines)
+                { <tr>
+                      <td align="center" width="45">@line.masp</td>
+                      <td align="center" width="95">@line.tensp</td>
+                      <td align="center" width="150">
+                      
+                      @using (Html.BeginForm("capnhatsoluong", "cart", new { masanpham = @line.masp }))
+                      {                      
+                            <input type="text" id="txtQuantity" name="soluong" size="3" value="@line.Quantity" />                        
+                            <input type="image" border="0"  @*align="absmiddle"*@ src="../../Content/image/refresh-icon.png" alt="submit" class="updatesoluong" value="" />                                           
+                            <a onclick="return xacnhanxoa('@line.masp')" href="/Cart/giohangxoa?masanpham=@line.masp"><img src="../../Content/Image/xoa-icon.png" border="0" align="middle" alt="Xoá"></a>
+                      }
+                       </td>
+                      <td align="center" width="90">@line.giasanpham VNĐ</td>             
+                      <td align="center" width="110">@(line.giasanpham * line.Quantity) VNĐ</td>
+                </tr>
+                }    
+                <tr>
+                	  <td colspan="4" align="center"><b style="color:#FF0000">TỔNG TIỀN HÀNG</b></td>
+                      <td align="center" width="110"><b style="color:#FF0000">@Model.Cart.tongtien().ToString("") VNĐ </b></td>
+                </tr>
+              </table>
+
+              <p>&nbsp;</p>
+              <table align="center"  border="0" >
+                    <tr>
+                          <td align="left" width="150"><span><a href="/Default"> TIẾP TỤC MUA HÀNG </a></span></td>
+                            @{IEnumerable<WebApp.Models.CartLine> list = Model.Cart.Lines;}
+                            @*@Html.ActionLink("THANH TOAN TIEN", "ConfirmCart")*@
+                          <td align="right" width="150"><span><a  href="/Cart/ConfirmCart"> THANH TOÁN TIỀN </a></span></td>
+                          
+                          <td align="right" width="100"><a href="/cart/xoahet/">
+                          <input type="image" border="0" style=" align-content:center" src="../../Content/Image/xoahet.png" title="Xoá hết sản phẩm trong giỏ" onclick="return xacnhanxoahet()">
+                          </a></td>
+                    </tr>
+            </table>           
+            <div class="noidunggiua"><hr style="color:#e1eedf" size="2" /></div>
+            <div class="buttonhome"><a href="/Default">Về trang chủ</a></div>
+            <p>&nbsp;</p>
+
+</div>
+@RenderPage("~/Views/Default/Footer.cshtml")

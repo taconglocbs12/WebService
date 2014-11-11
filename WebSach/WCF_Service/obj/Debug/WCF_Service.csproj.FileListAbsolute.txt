@@ -1,0 +1,8 @@
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\bin\WCF_Service.dll.config
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\bin\WCF_Service.dll
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\bin\WCF_Service.pdb
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\bin\EntityFramework.dll
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\bin\EntityFramework.xml
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\obj\Debug\WCF_Service.csprojResolveAssemblyReference.cache
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\obj\Debug\WCF_Service.dll
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\WCF_Service\obj\Debug\WCF_Service.pdb

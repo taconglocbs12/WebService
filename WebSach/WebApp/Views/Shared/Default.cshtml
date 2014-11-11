@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="../../Content/style.css" rel="stylesheet" type="text/css" />
+    @*<script src="../../Scripts/cript.js" type="text/javascript"></script>*@
+    <script type="text/javascript">
+        function goToLogOut() {
+            window.location.href = 'http://' + window.location.host + '/User/LogOff';
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <!--luon xuat hien-->
+        <div class="banner"></div>
+        <div class="menu">
+            <a href="/Default"> <div class="button">TRANG CHỦ</div></a>
+            <div class="menu-space"></div>
+            <a href="#"> <div class="button">GIỚI THIỆU</div></a>
+            <div class="menu-space"></div>
+            <a href="#"> <div class="button">TIN TỨC</div></a>
+            <div class="menu-space"></div>
+
+            <div class="menu-space"></div>
+            <a href="#"> <div class="button">LIÊN HỆ</div></a>
+
+
+            <div class="time">
+            <script>time()</script>	 </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="main">
+            <div class="columleft">
+                <div class="header-column">DANH MỤC SÁCH</div>
+                <div class="noidungcanhtrai">
+                    <div style="margin-top:3px">
+                        <div class="sidebarmenu">
+                            @{Html.RenderAction("Menu", "Default");}
+                        </div>
+                    </div>
+                </div>
+                <!--HIEN THI SAN PHAM BAN CHAY-->
+
+            </div>
+            <!--cột phải-->
+            <div class="columright">
+            
+                @if (Session["Account"]!=null)
+                {
+                    //Session["Account"] = @Html.Encode(User.Identity.Name);
+                    <div class="header-column">THÀNH VIÊN</div>
+                    <div class="noidungcanhtrai">
+
+                        <p align="center" style="color:#FF0000"><b>  <strong>Xin chào @Session["Account"]</strong> </b><br /></p>
+
+                       <center> <img src="../../Content/image/star.gif" /></center>
+                        <div style=" width:50px; float:left; text-align: left;">&nbsp;<br /></div>
+                        @using (Html.BeginForm("LogOff", "User"))
+                        {
+                            <div><input type="button" style="text-align:center" name="dangxuat" value="Đăng xuất" onclick="goToLogOut();" /></div>
+                        }
+                        <div><p align="center"><a href="/User/EditUser">Sửa thông tin cá nhân</a></p> </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="header-column">ĐĂNG NHẬP</div>
+                    <div class="noidungcanhtrai">
+                        @using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "Formdn", name = "Formdn", onSubmit = "return CheckDangNhap();" }))
+                        {
+                            <div style=" width:78px; float:left; text-align: left;">Tên truy nhập&nbsp;</div>
+                            <input type="text" name="username" id="username" size="10" maxlength="35" onchange="CheckTendn();" />
+                            //<span id="tendn" style="color:#FF0000"></span>
+                            <br />
+                            <div style=" width:78px; float:left; text-align: left;">Mật khẩu&nbsp;</div>
+                            <input type="password" name="txtpass" id="txtpass" size="10" value="" /><br />
+                            <div style=" width:78px; float:left; text-align: left;">Ghi nhớ&nbsp;</div>
+                            <input id="remember" class="checkbox" type="checkbox" checked="checked" value="1" name="remember" /><br />
+                            <span id="tendn" style="color:#FF0000"></span>
+
+                            <div style=" width:78px; float:left; text-align: left;">&nbsp;<br /></div>
+                            <input type="submit" style="text-align:center" value="Đăng nhập" />
+                            <div><p align="left"><a href="">@ViewBag.ThongBao</a></p> </div>
+                            <div><p align="left"><a href="/User/ForgotPassword">Quên mật khẩu</a></p> </div>
+                            <div><p align="left"> <a href="/User/FormRegister">Đăng kí thành viên</a></p></div>
+                        }
+
+                    </div>
+                }
+                @{Html.RenderAction("menugiohang", "cart");}
+                @{Html.RenderAction("sanphambanchay", "Default");}
+            </div>
+
+        </div>
+
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

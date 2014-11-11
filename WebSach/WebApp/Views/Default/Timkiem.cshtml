@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApp.ServiceReference1.Sach>
+
+@{
+    ViewBag.Title = "Tìm kiếm cơ bản";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+<div class="columcenter">
+    @{Html.RenderPartial("~/Views/Default/Box-Timkiem.cshtml");}
+</div>
+
+<div class="columcenter">
+    <div class="header-center">KẾT QUẢ TÌM KIẾM</div>
+    <div style="width:580px">
+        @if (Model.Count() < 1)
+        {
+            <div class="noidunggiua" style="padding:10px;">
+                Kết quả tìm kiếm với từ khóa: <b>@Html.Raw(ViewBag.Tensp)</b><br /><br />
+                <b>@Html.Raw(ViewBag.KhongTimThay)</b>
+            </div>
+        }
+        else
+        {
+            <div class="noidunggiua" style="padding:10px;">
+                Kết quả tìm kiếm với từ khóa: <b>@Html.Raw(ViewBag.Tensp)</b>
+            </div>
+            foreach (var item in Model)
+            {
+                <div class="sanpham">
+                    <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(modelItem => item.SachID).ToString().Trim()"><div><img src="../../Content/image/books/@Html.DisplayFor(modelItem => item.HinhBia)" /></div></a>
+                    <div class="tensanpham"><table align="center"><tr height="40px" valign="middle"><td><b>@Html.DisplayFor(modelItem => item.TenSach) </b></td></tr></table></div>
+                    <div style="color:#FF0000">Giá: @Html.DisplayFor(modelItem => item.GiaBan) VNĐ</div>
+                    @*@if (Request.IsAuthenticated)
+                        {
+                            <a href="/Cart/giohangthem?masanpham=@Html.DisplayFor(modelItem => item.SachID).ToString()"><div class="muahang"></div></a>
+                        }
+                        else
+                        {
+                            <a href="" onclick="alert('Bạn phải đăng nhập để mua hàng!');"><div class="muahang"></div></a>
+                        }*@
+                    @if (item.HetHang == false)
+                    {
+                        if (Request.IsAuthenticated)
+                        {
+
+                            <a href="/Cart/giohangthem?masanpham=@Html.DisplayFor(modelItem => item.SachID).ToString()"><div class="muahang"></div></a>
+
+                        }
+                        else
+                        {
+                            <a href="" onclick="alert('Bạn phải đăng nhập để mua hàng!');"><div class="muahang"></div></a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="#"><div class="hethang"></div></a>
+                    }
+                    <a href="/Default/Chitietsanpham?masp=@Html.DisplayFor(modelItem => item.SachID).ToString().Trim()"> <div class="chitiet"> </div></a>
+                </div>
+            }
+            <div class="clear"></div>
+            <div>@{Html.RenderAction("PhanTrang", "PageList", new { currentpage = "Default/timkiem?id=" + @ViewBag.Tensp, totalpages = ViewBag.TotalPages });}</div>
+            <div style="text-align:right; padding:6px; color:#FF3333; font-size:14px; height:22px"><a href="#top">>>Về đầu trang</a></div>
+        }
+    </div>
+
+</div>
+@RenderPage("Footer.cshtml")

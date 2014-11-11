@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="074631c28e614f8181000bb48a5e424a" Name="Diagram1">
+        <EntityTypeShape EntityType="QLBSModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.ChuDe" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.DatHang" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.DatHangCT" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.KhachHang" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.NhaXuatBan" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.QuangCao" Width="1.5" PointX="8.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.Sach" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.sysdiagram" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.TacGia" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBSModel.ThamGia" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="QLBSModel.FK_Sach_ChuDe" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_DatHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_DatHangCT_DatHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_DatHangCT_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_Sach_NhaXuatBan" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_ThamGia_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBSModel.FK_ThamGia_TacGia" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLBSModel.PhieuNhap" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="QLBSModel.PhieuNhapCT" Width="1.5" PointX="7.625" PointY="0.625" />
+        <AssociationConnector Association="QLBSModel.FK_PhieuNhapCT_PhieuNhap" />
+        <AssociationConnector Association="QLBSModel.FK_PhieuNhapCT_Sach" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

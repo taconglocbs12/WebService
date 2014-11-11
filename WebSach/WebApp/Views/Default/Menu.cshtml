@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<WebApp.ServiceReference1.ChuDe>
+
+<ul id="sidebarmenu1">
+    @foreach (var item in Model)
+    {
+
+        <li>
+            <a href="/Default/Danhmuc?chude=@Html.DisplayFor(p=>item.ChuDeID).ToString().Trim()">@Html.DisplayFor(p => item.TenChuDe)</a>
+        </li>
+
+    }
+</ul>

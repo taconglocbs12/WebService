@@ -1,0 +1,71 @@
+﻿@model WebApp.ServiceReference1.Sach
+@{
+    ViewBag.Title = "Chi tiết Sách";
+    Layout = "~/Views/Shared/Default.cshtml";
+}
+<div class="columcenter">
+    @{Html.RenderPartial("~/Views/Default/Box-Timkiem.cshtml");}
+</div>
+<div class="columcenter">
+    <div class=" header-center">@Html.DisplayFor(p => p.TenSach)</div>
+    <div style="width:580px">
+        <div class="sanphamchitiet">
+            <a href="#"><div><img src="../../Content/image/books/@Html.DisplayFor(p => p.HinhBia)" style="margin-top:10px;" /></div></a>
+        </div>
+        <div>
+            <div><br /><b><u>Mã sách:</u></b> @Html.DisplayFor(p => p.SachID)<br /></div>
+            <div><b><u>Nhà xuất bản:</u></b> @Html.DisplayFor(p => p.NhaXuatBan.TenNhaXuatBan)<br /></div>
+
+            <div><b><u>Mô tả:</u></b> @Html.DisplayFor(p => p.MoTa) <br /></div>
+            <div>
+                <br>
+                    <u>Tình trạng:</u>
+                    @if (Model.HetHang == false)
+                    {
+                        <u>còn hàng</u>;
+                    }
+                    else
+                    {
+                        <u>hết hàng</u>;
+                    }
+
+                    <br />
+            </div>
+            <div style="color:#FF0000"><b>Giá:</b> @Html.DisplayFor(p => p.GiaBan) VNĐ</div>
+            @if (Model.HetHang == false)
+            {
+                if (Session["Account"]!=null)
+                {
+                    using (Html.BeginForm("giohangthem", "Cart", new { masanpham = @Html.DisplayFor(p => p.SachID).ToString() }))
+                    {
+                        <div>
+                            <b>Số lượng:</b>&nbsp;&nbsp;&nbsp;
+                            <input id="CT" class="textbox2" type="text" value="1" name="CT">
+                        </div>
+                        <input type="submit" alt="them" class="muahang1" value="" />
+                    }
+                }
+                else
+                {
+                    <div>
+                        <b>Số lượng:</b>&nbsp;&nbsp;&nbsp;
+                        <input id="CT" class="textbox2" type="text" value="1" name="CT">
+                    </div>
+                    <input type="submit" alt="them" class="muahang1" value="" onclick="alert('Bạn phải đăng nhập để mua hàng!');" />
+                }
+            }
+            else
+            {
+                <input type="button" class="hethang" value="" />
+            }
+
+
+
+        </div>
+    </div>
+</div>
+
+@*@{Html.RenderAction("SPCungLoai");}*@
+
+@RenderPage("Footer.cshtml")
+

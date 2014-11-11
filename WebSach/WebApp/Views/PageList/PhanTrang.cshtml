@@ -1,0 +1,27 @@
+﻿<center>
+    @{
+        int page;
+        if (ViewBag.Page > 1)
+        {
+            page = ViewBag.Page - 1;
+            <a href="/@ViewBag.currentpage&page=1">[Trang đầu]</a>
+            <a href="/@ViewBag.currentpage&page=@page">[Trang trước]</a>
+        }
+        for (page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            if (page == ViewBag.Page)
+            { <font color='red'>@page</font> }
+            else
+            {
+                <a href="/@ViewBag.currentpage&page=@page">@page</a>
+            }
+        }
+        if (ViewBag.Page < ViewBag.TotalPages)
+        {
+            page = ViewBag.Page + 1;
+            <a href="/@ViewBag.currentpage&page=@page">[Trang kế]</a>
+            <a href="/@ViewBag.currentpage&page=@ViewBag.TotalPages">[Trang cuối]</a>
+        }
+    }
+
+</center>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WebApp.ServiceReference1.ChuDe>
+<select name="loaihang">
+
+    @foreach (var item in Model)
+    {
+
+        <option value="@Html.DisplayFor(p=>item.ChuDeID).ToString().Trim()">@Html.DisplayFor(p => item.TenChuDe)</option>
+
+
+    }
+    <option selected="selected" value="tatca">Mọi chủ đề</option>
+</select>

@@ -1,0 +1,9 @@
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\bin\Debug\Admin.exe.config
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\bin\Debug\Admin.exe
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\bin\Debug\Admin.pdb
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.csprojResolveAssemblyReference.cache
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.Form1.resources
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.Properties.Resources.resources
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.csproj.GenerateResource.Cache
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.exe
+C:\Users\Ta\Documents\Visual Studio 2013\Projects\WebSach\Admin\obj\Debug\Admin.pdb
